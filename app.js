@@ -1,15 +1,22 @@
 var express = require('express');
 var http = require('http');
+var cors = require('cors')
 var cookieParser = require('cookie-parser');
 require('dotenv').config({path:'./config/dev.env'});
+require('./utils/db');
 
 var app = express();
+app.use(cors());
+
+const authRouter = require('./routes/auth.route.js');
+const auth = require('./middlewares/auth.mdw.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', function(req,res,next) {
+app.use('/api/auth', authRouter);
+app.use('/',auth, function(req,res,next) {
     res.send("Hello");
 })
 

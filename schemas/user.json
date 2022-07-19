@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "password": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "userName":{
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "userType": {
+      "type": "string"
+    },
+    "refreshToken" : {
+      "type": "string"
+    }
+  },
+  "required": [
+    "lastName",
+    "firstName",
+    "userType",
+    "userName",
+    "password"
+  ],
+  "additionalProperties": false
+}
