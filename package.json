@@ -1,0 +1,17 @@
+{
+  "name": "look-like-kahoot-be",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": "https://github.com/khuuthuyky123/look-like-kahoot-be.git",
+  "author": "Ky Khuu",
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "http": "^0.0.1-security"
+  }
+}
