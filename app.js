@@ -9,6 +9,7 @@ var app = express();
 app.use(cors());
 
 const authRouter = require('./routes/auth.route.js');
+const quizRouter = require("./routes/quiz.route.js");
 const auth = require('./middlewares/auth.mdw.js');
 
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
+app.use('/api/quiz',auth, quizRouter);
 app.use('/',auth, function(req,res,next) {
     res.send("Hello");
 })
