@@ -9,6 +9,11 @@ var app = express();
 app.use(cors());
 
 const authRouter = require('./routes/auth.route.js');
+const quizRouter = require("./routes/quiz.route.js");
+const gameRouter = require("./routes/game.route.js");
+const leaderboardRouter = require("./routes/leaderboard.route.js");
+const playerResultsRouter = require("./routes/playerResult.route");
+
 const auth = require('./middlewares/auth.mdw.js');
 
 app.use(express.json());
@@ -16,9 +21,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
-app.use('/',auth, function(req,res,next) {
-    res.send("Hello");
-})
+app.use('/api/quiz',auth, quizRouter);
+app.use('/api/games',auth, gameRouter);
+app.use('/api/leaderboard',auth,leaderboardRouter);
+app.use('/api/playerResults',auth,playerResultsRouter);
+
 
 
 var server = http.createServer(app);
