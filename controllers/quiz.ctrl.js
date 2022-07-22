@@ -7,28 +7,28 @@ const createQuiz = async (req, res) => {
       name,
       backgroundImage,
       description,
-      creatorName,
+      // creatorName,
       pointsPerQuestion,
-      isPublic,
-      tags,
-      likesCount,
+      // isPublic,
+      // tags,
+      // likesCount,
       questionList,
     } = req.body;
-    const quiz = quizModel.create({
+    const quiz = await quizModel.create({
       name,
-      backgroundImage,
-      description,
+      backgroundImage: backgroundImage || "",
+      description: description || "",
       creatorId: req.accessTokenPayload.userId,
-      creatorName,
-      pointsPerQuestion,
-      numberOfQuestions: questionList.length || 0 ,
-      isPublic,
-      tags,
-      likesCount,
-      questionList,
+      // creatorName,
+      pointsPerQuestion: pointsPerQuestion || 1,
+      numberOfQuestions: questionList ? questionList.length : 0 ,
+      // isPublic,
+      // tags,
+      // likesCount,
+      questionList: questionList || [],
       dateCreated: new Date().toISOString(),
     });
-
+console.log(quiz);
     res.status(201).json(quiz);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -36,7 +36,8 @@ const createQuiz = async (req, res) => {
 };
 
 const getTeacherquizzes = async (req, res) => {
-  let teacherId = req.params.teacherId;
+  let teacherId = req.accessTokenPayload.userId;
+  console.log(teacherId);
   try {
     const quizzes = await quizModel.find({ creatorId: teacherId });
     res.status(200).send(quizzes);
@@ -94,6 +95,7 @@ const updateQuiz = async (req, res) => {
     isPublic,
     tags,
     questionList,
+    numberOfQuestions: questionList ? questionList.length : 0 ,
   };
 
   try {

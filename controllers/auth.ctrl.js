@@ -25,7 +25,7 @@ const login = async function (req, res) {
     // roles: ['film:list', 'film:add', 'film:update', ...]
   };
   const opts = {
-    expiresIn: 30, // seconds
+    expiresIn: 10, // seconds
   };
   const accessToken = jwt.sign(payload, secret_key, opts);
 
@@ -104,7 +104,7 @@ const refresh = async function (req, res) {
     const ret = await userModel.findOne({ userId });
     if ((ret.refreshToken==refreshToken) === true) {
       const newAccessToken = jwt.sign({ userId }, secret_key, {
-        expiresIn: 30,
+        expiresIn: 10,
       });
       return res.json({
         accessToken: newAccessToken,
